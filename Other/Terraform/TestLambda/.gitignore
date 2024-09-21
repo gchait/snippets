@@ -1,0 +1,5 @@
+*.swp
+lambda.zip
+.terraform
+out.txt
+terraform.tfstate*
