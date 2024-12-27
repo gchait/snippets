@@ -1,5 +1,3 @@
-#!/bin/bash -xe
-
 set -o nounset
 export OS_USERNAME="${1}"
 

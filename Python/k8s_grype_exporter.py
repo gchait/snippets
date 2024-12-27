@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from itertools import islice
 from subprocess import run
 from tempfile import NamedTemporaryFile

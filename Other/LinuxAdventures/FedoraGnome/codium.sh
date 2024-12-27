@@ -1,5 +1,3 @@
-#!/bin/sh
-
 codium --install-extension bungcip.better-toml
 codium --install-extension Catppuccin.catppuccin-vsc-icons
 codium --install-extension eamodio.gitlens

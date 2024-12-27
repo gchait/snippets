@@ -1,5 +1,3 @@
-#!/bin/sh -e
-
 . ./.env
 
 # ./manage.py collectstatic --noinput

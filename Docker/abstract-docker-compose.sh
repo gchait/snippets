@@ -1,5 +1,3 @@
-#!/bin/bash
-
 export COMPOSE_FILE=compose.yaml
 export COMPOSE_PROJECT_NAME=xyz
 export DOCKER_SCAN_SUGGEST=false

@@ -1,5 +1,3 @@
-#!/bin/bash -xe
-
 export DEBIAN_FRONTEND=noninteractive
 
 apt_up() {

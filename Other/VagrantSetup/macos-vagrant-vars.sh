@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 export VAGRANT_EXPERIMENTAL="disks"
 
 CALC_MEM=$(expr $(system_profiler SPHardwareDataType | \

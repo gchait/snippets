@@ -1,4 +1,3 @@
-
 node_group_name=$(xxxxx)
 
 aws eks update-nodegroup-version --cluster-name ${cluster_name} --region ${region} \

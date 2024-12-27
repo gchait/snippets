@@ -1,5 +1,3 @@
-#!/bin/sh -ex
-
 SERVING_TAG="knative-v1.13.1"
 NET_CONTOUR_TAG="knative-v1.13.0"
 

@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 yq --help &> /dev/null || { echo yq is required! && exit 2; }
 
 sedi=(-i)

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 PASS_LEN=${PASS_LEN:-xxx}
 SCRIPT_NAME=$(basename "$0")
 ARGS="$*"

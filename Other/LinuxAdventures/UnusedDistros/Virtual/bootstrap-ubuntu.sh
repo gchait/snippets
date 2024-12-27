@@ -1,5 +1,3 @@
-#!/bin/bash -xe
-
 export OS_USER=guy
 
 apt_up() {
