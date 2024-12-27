@@ -1,10 +1,10 @@
 export VAGRANT_EXPERIMENTAL="disks"
 
 CALC_MEM=$(expr $(system_profiler SPHardwareDataType | \
-    grep Memory: | grep -Eo "[[:digit:]]+") / 4 '*' 1024)
+  grep Memory: | grep -Eo "[[:digit:]]+") / 4 '*' 1024)
 
 CALC_CPU=$(expr $(system_profiler SPHardwareDataType | \
-    grep Cores: | grep -Eo "[[:digit:]]+") / 2)
+  grep Cores: | grep -Eo "[[:digit:]]+") / 2)
 
 
 export GIT_NAME="Guy Chait"

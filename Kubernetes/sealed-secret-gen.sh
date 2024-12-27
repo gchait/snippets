@@ -30,18 +30,18 @@ shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
 if [ -n "$1" ]; then
-    echo "Unknown argument: $1" >&2
-    exit 2
+  echo "Unknown argument: $1" >&2
+  exit 2
 fi
 
 if [ -z "$input_file" ]; then
-    echo "Required argument is missing: -i <file containing a Kubernetes Secret>." >&2
-    exit 2
+  echo "Required argument is missing: -i <file containing a Kubernetes Secret>." >&2
+  exit 2
 fi
 
 if [ ! -f "$input_file" ]; then
-    echo "File not found: $input_file." >&2
-    exit 1
+  echo "File not found: $input_file." >&2
+  exit 1
 fi
 
 input=$(yq 'del(.metadata.namespace)' "$input_file" | sed '/ null$/d')
@@ -49,9 +49,9 @@ echo "$input" | $SEAL_CMD > $TMP_FILE
 name=$(yq '.metadata.name' "$input_file")
 
 if [ -n "$password" ]; then
-    echo -n "$password" | kubectl create secret generic "$name" \
-        --dry-run=client --from-file=password=/dev/stdin -o yaml | \
-        $SEAL_CMD --merge-into $TMP_FILE
+  echo -n "$password" | kubectl create secret generic "$name" \
+    --dry-run=client --from-file=password=/dev/stdin -o yaml | \
+    $SEAL_CMD --merge-into $TMP_FILE
 fi
 
 result=$(sed '/ null$/d' $TMP_FILE)
