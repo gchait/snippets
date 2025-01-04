@@ -6,6 +6,7 @@ get_executable() {
 }
 
 get_repo() {
+  # shellcheck disable=SC2015
   cd "$1" && git pull || git clone "$2" "$1"
 }
 

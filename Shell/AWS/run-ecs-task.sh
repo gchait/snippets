@@ -1,3 +1,4 @@
+# shellcheck disable=SC2086
 set -o allexport
 source .env
 set +o allexport

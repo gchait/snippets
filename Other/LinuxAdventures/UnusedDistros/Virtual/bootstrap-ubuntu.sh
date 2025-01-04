@@ -18,7 +18,7 @@ pretty() {
   # p10k
   [[ -d ~/.oh-my-zsh/custom/themes/powerlevel10k ]] || git clone \
     --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
+    "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k"
 
   # Main venv
   python3 -m venv ~/.venv
@@ -54,6 +54,7 @@ install -m 0755 -d /etc/apt/keyrings
   gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
   chmod a+r /etc/apt/keyrings/docker.gpg; }
 
+# shellcheck disable=SC2027,SC2046
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] \
   https://download.docker.com/linux/ubuntu \
@@ -66,7 +67,7 @@ apt-get install -yq docker-ce docker-ce-cli containerd.io \
 echo '{"default-address-pools":[{"base":"10.2.0.0/16","size":24}]}' > /etc/docker/daemon.json
 
 systemctl restart docker
-usermod -aG docker ${OS_USER}
+usermod -aG docker "${OS_USER}"
 # Docker end
 
 # MongoDB repo
@@ -109,7 +110,7 @@ chmod +x /usr/local/bin/websocat
 
 export -f pretty
 su ${OS_USER} -c "bash -xec pretty"
-chsh -s $(which zsh) ${OS_USER}
+chsh -s "$(which zsh)" "${OS_USER}"
 
 apt_up
 echo REMEMBER TO BRING YOUR DOTFILES NOW

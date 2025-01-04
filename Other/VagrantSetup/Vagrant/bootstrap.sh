@@ -7,7 +7,7 @@ configure_user() {
     https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k --depth 1
   
   # Dotfiles
-  if [ ${OS_USERNAME} = "vagrant" ]; then
+  if [ "${OS_USERNAME}" = "vagrant" ]; then
     cp -r /vagrant/Home/.* ~/
   else
     cp -Lr ./Home/.* ~/
@@ -32,7 +32,7 @@ get_docker() {
     /etc/docker/daemon.json
   systemctl restart docker
   systemctl enable docker
-  usermod -aG docker ${OS_USERNAME}
+  usermod -aG docker "${OS_USERNAME}"
 }
 
 # Base repo packages
@@ -58,10 +58,10 @@ wget -qO /usr/local/bin/pfetch \
   https://raw.githubusercontent.com/dylanaraps/pfetch/master/pfetch
 chmod +x /usr/local/bin/pfetch
 
-if [ ${OS_USERNAME} = "vagrant" ]; then
+if [ "${OS_USERNAME}" = "vagrant" ]; then
   # De-bloat
   hostnamectl hostname fedora
-  > /etc/motd
+  true > /etc/motd
   grep "#PrintLastLog yes" /etc/ssh/sshd_config \
     && sed -i "s/#PrintLastLog yes/PrintLastLog no/" /etc/ssh/sshd_config \
     && systemctl restart sshd
@@ -78,5 +78,5 @@ fi
 
 # Regular user configuration
 export -f configure_user
-su ${OS_USERNAME} -c "bash -xec configure_user"
-chsh -s $(which zsh) ${OS_USERNAME}
+su "${OS_USERNAME}" -c "bash -xec configure_user"
+chsh -s "$(which zsh)" "${OS_USERNAME}"

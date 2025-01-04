@@ -1,11 +1,11 @@
-regions=$($AWS ec2 describe-regions --output text | cut -f4)
+regions=$(${AWS} ec2 describe-regions --output text | cut -f4)
 
 for region in ${regions}; do
   echo "------------------------------------"
-  echo "Iterating over region $region ..."
+  echo "Iterating over region ${region}..."
 
   # shellcheck disable=SC2016
-  volume_ids=$($AWS ec2 describe-volumes --region "$region" \
+  volume_ids=$($AWS ec2 describe-volumes --region "${region}" \
     --filters Name=volume-type,Values=gp2 --output text \
     --query 'Volumes[?Size <= `1000`].VolumeId')
 

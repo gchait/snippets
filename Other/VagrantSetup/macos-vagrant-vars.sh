@@ -1,3 +1,5 @@
+# shellcheck disable=SC2003,SC2046
+
 export VAGRANT_EXPERIMENTAL="disks"
 
 CALC_MEM=$(expr $(system_profiler SPHardwareDataType | \
@@ -13,5 +15,5 @@ export GIT_EMAIL="53366531+gchait@users.noreply.github.com"
 export DISK_GB=200
 export PORT_TCP=8080
 
-export MEMORY=$(( ${CALC_MEM} > 1024 ? ${CALC_MEM} : 1024 ))
-export CPUS=$(( ${CALC_CPU} > 1 ? ${CALC_CPU} : 1 ))
+export MEMORY=$(( CALC_MEM > 1024 ? CALC_MEM : 1024 ))
+export CPUS=$(( CALC_CPU > 1 ? CALC_CPU : 1 ))
