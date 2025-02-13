@@ -1,0 +1,14 @@
+set dotenv-load
+
+default: build login push
+
+build:
+	docker build -t "${REMOTE_REPO}:${TAG}.tmp" .
+	docker-squash --cleanup \
+		-t "${REMOTE_REPO}:${TAG}" "${REMOTE_REPO}:${TAG}.tmp"
+
+login:
+	echo Hi
+
+push:
+	docker push "${REMOTE_REPO}:${TAG}"
