@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<MergeFile type="parent">/etc/xdg/menus/cinnamon-applications.menu</MergeFile>
+	<Menu>
+		<Name>Accessories</Name>
+		<Exclude>
+			<Filename>engrampa.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/guy/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>vim.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>cinnamon-onscreen-keyboard.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Games</Name>
+		<Exclude>
+			<Filename>Steam Linux Runtime 3.0 (sniper).desktop</Filename>
+		</Exclude>
+		<AppDir>/home/guy/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>Steam Linux Runtime 2.0 (soldier).desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>Steam Linux Runtime 1.0 (scout).desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>Proton Hotfix.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>steam.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Internet</Name>
+		<Exclude>
+			<Filename>bssh.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/guy/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>bvnc.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Multimedia</Name>
+		<Exclude>
+			<Filename>qvidcap.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/guy/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>qv4l2.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Administration</Name>
+		<Exclude>
+			<Filename>avahi-discover.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/guy/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>htop.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>jconsole-java21-openjdk.desktop</Filename>
+		</Exclude>
+		<Exclude>
+			<Filename>jshell-java21-openjdk.desktop</Filename>
+		</Exclude>
+	</Menu>
+</Menu>

@@ -1,0 +1,23 @@
+<monitors version="2">
+  <configuration>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>2</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DisplayPort-0</connector>
+          <vendor>SAM</vendor>
+          <product>LC34G55T</product>
+          <serial>HNTX100097</serial>
+        </monitorspec>
+        <mode>
+          <width>3440</width>
+          <height>1440</height>
+          <rate>164.99925231933594</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+  </configuration>
+</monitors>

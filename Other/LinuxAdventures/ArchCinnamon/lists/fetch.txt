@@ -1,0 +1,18 @@
+OS: Arch Linux x86_64
+Host: Z790 AORUS ELITE DDR4
+Kernel: Linux 6.12.10-zen1-1-zen
+Packages: 900 (pacman)
+Shell: zsh 5.9
+Display (LC34G55T): 3440x1440 @ 165 Hz in 34" [External]
+DE: Cinnamon 6.4.6
+WM: Muffin (X11)
+Theme: Orchis-Dark [GTK2/3/4]
+Icons: Papirus-Dark [GTK2/3/4]
+Font: Arimo (11pt) [GTK2/3/4]
+Cursor: Bibata-Modern-Classic (24px)
+Terminal: ghostty 1.1.0-arch
+Terminal Font: Fira Code Retina (13pt)
+CPU: 13th Gen Intel(R) Core(TM) i5-13600K (20) @ 5.10 GHz
+GPU: AMD Radeon RX 7900 XT [Discrete]
+Memory: 4.95 GiB / 31.18 GiB (16%)
+Disk (/): 503.10 GiB / 930.06 GiB (54%) - xfs
