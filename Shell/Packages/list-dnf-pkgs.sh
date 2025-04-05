@@ -1,1 +1,1 @@
-dnf repoquery --qf '%{name}' --userinstalled
+dnf4 repoquery --qf '%{name}' --userinstalled
