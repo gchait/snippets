@@ -1,3 +1,5 @@
+# type: ignore
+
 def append_move_comment_list(li, item):
     """Appends an item to a commented list, moving the last comment to the new last item."""
     comment = None
@@ -96,11 +98,3 @@ def set_style(data, flow):
             data.fa.set_block_style()
         for item in data:
             set_style(item, flow)
-
-
-def str_to_bool(s):
-    """Converts a given string to a boolean."""
-    lower_s = s.lower()
-    if lower_s not in ("true", "false"):
-        fail(f'Invalid boolean value: "{s}".', 2)
-    return lower_s == "true"

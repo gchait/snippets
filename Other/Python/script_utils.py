@@ -81,6 +81,14 @@ def str_presenter(dumper, data):
     return dumper.represent_scalar("tag:yaml.org,2002:str", data)
 
 
+def str_to_bool(s):
+    """Converts a given string to a boolean."""
+    lower_s = s.lower()
+    if lower_s not in ("true", "false"):
+        fail(f'Invalid boolean value: "{s}".', 2)
+    return lower_s == "true"
+
+
 if __name__ == "__main__":
     try:
         # Calculate for great success
@@ -92,6 +100,6 @@ if __name__ == "__main__":
         print("─" * MAX_OUTPUT_LINE_LEN)
         print(f".{':' * decor_len} {TOOL_NAME} {':' * (decor_len + odd_flag)}.")
         print("─" * MAX_OUTPUT_LINE_LEN)
-        main()
+        print("main()")
     finally:
         print("─" * MAX_OUTPUT_LINE_LEN)

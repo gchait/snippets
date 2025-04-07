@@ -1,3 +1,5 @@
+# type: ignore
+
 from itertools import islice
 from subprocess import run
 from tempfile import NamedTemporaryFile

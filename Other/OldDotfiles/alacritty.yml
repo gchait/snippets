@@ -1,9 +1,9 @@
----
 # In Windows only:
 # shell:
 #   program: powershell
 #   args:
 #     - -nologo
+
 working_directory: "PLACEHOLDER"
 window:
   startup_mode: Maximized

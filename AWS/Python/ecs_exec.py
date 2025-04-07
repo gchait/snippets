@@ -1,3 +1,4 @@
+# type: ignore
 """
 Some functions to make ECS easier to use.
 """
