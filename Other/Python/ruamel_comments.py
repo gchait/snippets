@@ -1,5 +1,6 @@
 # type: ignore
 
+
 def append_move_comment_list(li, item):
     """Appends an item to a commented list, moving the last comment to the new last item."""
     comment = None

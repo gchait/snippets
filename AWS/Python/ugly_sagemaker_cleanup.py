@@ -8,11 +8,17 @@ TRIES = 2
 
 def print_sagemaker_arns(arns, failed=False):
     if failed:
-        print("This script is not perfect, these resources still remain in the Resource Groups Tagging API:")
+        print(
+            "This script is not perfect, these resources still remain in the Resource Groups Tagging API:"
+        )
         print("(But maybe they were already deleted in reality:")
-        print("https://repost.aws/questions/QUcinjyU36SBSmcYA8eYJf0Q/"
-              "only-get-existing-resources-with-resource-group-tagging-api")
-        print("https://stackoverflow.com/questions/71035336/only-get-existing-resources-with-resourcegrouptaggingapi)")
+        print(
+            "https://repost.aws/questions/QUcinjyU36SBSmcYA8eYJf0Q/"
+            "only-get-existing-resources-with-resource-group-tagging-api"
+        )
+        print(
+            "https://stackoverflow.com/questions/71035336/only-get-existing-resources-with-resourcegrouptaggingapi)"
+        )
     else:
         print("Discovered these SageMaker resources:")
 
@@ -25,7 +31,9 @@ def disassociate_sagemaker_resources(arns):
         for y in reversed(arns):
             p = run(
                 f"aws sagemaker delete-association --region {REGION} --destination-arn {x} --source-arn {y} && sleep 1",
-                shell=True, capture_output=True, text=True
+                shell=True,
+                capture_output=True,
+                text=True,
             )
 
             if p.stderr:
@@ -35,7 +43,9 @@ def disassociate_sagemaker_resources(arns):
 def delete_sagemaker_resource(resource_type, resource_name):
     p = run(
         f"aws sagemaker delete-{resource_type} --region {REGION} --{resource_type}-name {resource_name}",
-        shell=True, capture_output=True, text=True
+        shell=True,
+        capture_output=True,
+        text=True,
     )
 
     if p.stderr:
@@ -45,20 +55,22 @@ def delete_sagemaker_resource(resource_type, resource_name):
 
 def filter_arns_by_type(arns, resource_type):
     return (
-        {
-            "arn": arn,
-            "name": arn.split("/")[1]
-        }
-        for arn in arns if f":{resource_type}/" in arn
+        {"arn": arn, "name": arn.split("/")[1]}
+        for arn in arns
+        if f":{resource_type}/" in arn
     )
 
 
 def discover_sagemaker_resources():
     arns = run(
-        (f"aws resourcegroupstaggingapi get-resources --region {REGION} --tag-filters "
-         f"Key=TAG,Values={TAG} --query 'ResourceTagMappingList[].ResourceARN' | "
-         "grep ':sagemaker:' | tr -d '\",' | awk '{print $1}' | sort"),
-        shell=True, capture_output=True, text=True
+        (
+            f"aws resourcegroupstaggingapi get-resources --region {REGION} --tag-filters "
+            f"Key=TAG,Values={TAG} --query 'ResourceTagMappingList[].ResourceARN' | "
+            "grep ':sagemaker:' | tr -d '\",' | awk '{print $1}' | sort"
+        ),
+        shell=True,
+        capture_output=True,
+        text=True,
     ).stdout.splitlines()
 
     endpoints = filter_arns_by_type(arns, "endpoint")
@@ -72,13 +84,17 @@ def discover_sagemaker_resources():
 
 def main():
     for _ in range(TRIES):
-        arns, endpoints, endpoint_configs, models, actions, contexts = discover_sagemaker_resources()
+        arns, endpoints, endpoint_configs, models, actions, contexts = (
+            discover_sagemaker_resources()
+        )
 
         print_sagemaker_arns(arns)
         shuffle(arns)
 
         print("Disassociating resources...")
-        disassociate_sagemaker_resources([a["arn"] for a in actions] + [c["arn"] for c in contexts])
+        disassociate_sagemaker_resources(
+            [a["arn"] for a in actions] + [c["arn"] for c in contexts]
+        )
 
         print("Deleting endpoints...")
         for e in endpoints:

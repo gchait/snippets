@@ -1,5 +1,6 @@
 # type: ignore
 
+
 def ec2_instance_types(region):
     """Yields all available EC2 instance types in the specified region."""
     ec2 = boto3.client("ec2", region_name=region)

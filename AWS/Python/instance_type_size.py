@@ -1,5 +1,6 @@
 # type: ignore
 
+
 def instance_type_to_cpu_mem(
     region: str, instance_type: str
 ) -> Optional[tuple[int, int]]:

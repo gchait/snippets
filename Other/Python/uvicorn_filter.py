@@ -1,5 +1,6 @@
 # type: ignore
 
+
 class EndpointFilter(Filter):
     """A generic way to filter out web endpoints from the logs."""
 
