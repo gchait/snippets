@@ -3,9 +3,9 @@
 Some functions to make ECS easier to use.
 """
 
+import construct as c
 import json
 import uuid
-import construct as c
 import websocket
 
 
@@ -52,4 +52,4 @@ def ecs_execute_command(ecs_client, cluster: str, task: str, command: str) -> st
     finally:
         connection.close()
 
-    return agent_message_payload.parse(response[message.HeaderLength :]).Payload
+    return agent_message_payload.parse(response[message.HeaderLength:]).Payload

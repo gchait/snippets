@@ -19,6 +19,9 @@
   "snapshot_size": "255162455373",
   "snapshot_count": "392756",
   "date_format": "%Y-%m-%d %H:%M:%S",
-  "exclude": ["+ /home/guy/**", "+ /root/**"],
+  "exclude": [
+    "+ /home/guy/**",
+    "+ /root/**"
+  ],
   "exclude-apps": []
 }

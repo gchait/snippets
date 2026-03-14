@@ -1,5 +1,5 @@
-from os import getenv
 from certifi import where as certs_where
+from os import getenv
 
 mongo_tls = getenv("MONGO_TLS", None) == "true"
 mongo_config = dict(

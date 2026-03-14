@@ -12,15 +12,31 @@ $env:GIT_EMAIL = "53366531+gchait@users.noreply.github.com"
 $env:DISK_GB = 200
 $env:PORT_TCP = 8080
 
-$env:MEMORY = if ($calcMem -gt 1) { $calcMem / 4 * 1024 } else { 1024 }
-$env:CPUS = if ($calcCpu -gt 1) { $calcCpu / 2 } else { 1 }
+$env:MEMORY = if ($calcMem -gt 1)
+{
+  $calcMem / 4 * 1024
+}
+else
+{
+  1024
+}
+$env:CPUS = if ($calcCpu -gt 1)
+{
+  $calcCpu / 2
+}
+else
+{
+  1
+}
 
 New-Alias v vagrant
 
-function ntex {
+function ntex
+{
   mkdir "$args"
-  
-  if ($?) {
+
+  if ($?)
+  {
     Copy-Item -Path $HOME\gchait\WinHost\LatexExample\* `
       -Destination .\$args\ -Recurse
   }

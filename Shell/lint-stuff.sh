@@ -1,7 +1,7 @@
-find xxx -type d -mindepth 1 -maxdepth 1 | \
+find xxx -type d -mindepth 1 -maxdepth 1 |
   xargs -I {} bash -c "cd {} && terraform init -backend=false && terraform validate"
 
-find . -type f -name "*.tf" | xargs dirname | sort -u | \
+find . -type f -name "*.tf" | xargs dirname | sort -u |
   xargs -I {} bash -c "cd {} && tflint --disable-rule=terraform_typed_variables || true"
 
 find . -type f -name "*.py" -exec pylint {} + || true

@@ -1,1 +1,1 @@
-[ -z "${THINGS// }" ] && echo "Nothing to do." && exit 0
+[ -z "${THINGS// /}" ] && echo "Nothing to do." && exit 0

@@ -5,7 +5,7 @@ configure_user() {
   # p10k
   [[ -d ~/powerlevel10k ]] || git clone \
     https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k --depth 1
-  
+
   # Dotfiles
   if [ "${OS_USERNAME}" = "vagrant" ]; then
     cp -r /vagrant/Home/.* ~/
@@ -62,10 +62,10 @@ if [ "${OS_USERNAME}" = "vagrant" ]; then
   # De-bloat
   hostnamectl hostname fedora
   true > /etc/motd
-  grep "#PrintLastLog yes" /etc/ssh/sshd_config \
-    && sed -i "s/#PrintLastLog yes/PrintLastLog no/" /etc/ssh/sshd_config \
-    && systemctl restart sshd
-  
+  grep "#PrintLastLog yes" /etc/ssh/sshd_config &&
+    sed -i "s/#PrintLastLog yes/PrintLastLog no/" /etc/ssh/sshd_config &&
+    systemctl restart sshd
+
   # Ensure the filesystem takes all the space
   growpart /dev/sda 2 || true
   xfs_growfs /dev/sda2 || true

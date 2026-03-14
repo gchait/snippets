@@ -1,7 +1,7 @@
-import textwrap
-import sys
 import os
 import shutil
+import sys
+import textwrap
 import yaml
 
 TOOL_NAME = "Xyz Lala"

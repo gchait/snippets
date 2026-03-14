@@ -4,9 +4,9 @@ export DOCKER_SCAN_SUGGEST=false
 export COMPOSE_IGNORE_ORPHANS=true
 
 case "${1}" in
-  1) action="up --detach" reverse="" ;;
-  0) action="down" reverse="reverse |" ;;
-  *) echo "Please specify either 1 or 0." >&2 && exit 2 ;;
+1) action="up --detach" reverse="" ;;
+0) action="down" reverse="reverse |" ;;
+*) echo "Please specify either 1 or 0." >&2 && exit 2 ;;
 esac
 
 shift 1

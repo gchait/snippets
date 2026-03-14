@@ -1,5 +1,5 @@
-from subprocess import run
 from random import shuffle
+from subprocess import run
 
 REGION = "xxx"
 TAG = "xxx"

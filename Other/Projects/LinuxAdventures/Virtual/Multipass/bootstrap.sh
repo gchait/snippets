@@ -44,21 +44,21 @@ apt-get install -yq \
   libmariadb-dev software-properties-common
 
 # Docker start
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do 
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
   apt-get remove -yq ${pkg}
 done
 
 install -m 0755 -d /etc/apt/keyrings
-[[ -f /etc/apt/keyrings/docker.gpg ]] || \
-  { curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-  gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
-  chmod a+r /etc/apt/keyrings/docker.gpg; }
+[[ -f /etc/apt/keyrings/docker.gpg ]] ||
+  { curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
+    gpg --dearmor -o /etc/apt/keyrings/docker.gpg &&
+    chmod a+r /etc/apt/keyrings/docker.gpg; }
 
 # shellcheck disable=SC2027,SC2046
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] \
   https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "${VERSION_CODENAME}")" stable" | \
+  "$(. /etc/os-release && echo "${VERSION_CODENAME}")" stable" |
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 apt_up
@@ -73,20 +73,20 @@ usermod -aG docker "${OS_USER}"
 # MongoDB repo
 wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu \
-  focal/mongodb-org/6.0 multiverse" | \
+  focal/mongodb-org/6.0 multiverse" |
   tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 
 # GitHub CLI repo
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg |
   dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
 chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) \
   signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] \
-  https://cli.github.com/packages stable main" | \
+  https://cli.github.com/packages stable main" |
   tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
 # Amazon Corretto repo
-wget -O- https://apt.corretto.aws/corretto.key | apt-key add - 
+wget -O- https://apt.corretto.aws/corretto.key | apt-key add -
 add-apt-repository 'deb https://apt.corretto.aws stable main'
 
 # External repo packages
@@ -105,7 +105,7 @@ wget -O /usr/local/bin/websocat \
 chmod +x /usr/local/bin/websocat
 
 [[ -f /usr/local/bin/just ]] || curl --proto '=https' \
-  --tlsv1.2 -sSf https://just.systems/install.sh | \
+  --tlsv1.2 -sSf https://just.systems/install.sh |
   bash -s -- --to /usr/local/bin/
 
 export -f pretty

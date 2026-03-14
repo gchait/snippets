@@ -3,13 +3,11 @@
   "workbench.iconTheme": "gruvbox-material-icon-theme",
   "workbench.colorTheme": "Dracula Theme",
   "editor.fontFamily": "Fira Code Retina",
-
   "update.showReleaseNotes": false,
   "extensions.ignoreRecommendations": true,
   "workbench.startupEditor": "none",
   "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
-
   "editor.stickyScroll.enabled": false,
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
@@ -19,25 +17,23 @@
   "editor.fontSize": 16,
   "editor.wordWrap": "on",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-
   "git.confirmSync": false,
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "git.openRepositoryInParentFolders": "never",
-
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "onFocusChange",
   "files.eol": "\n",
-
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
   "explorer.confirmPasteNative": false,
-
   "telemetry.telemetryLevel": "off",
   "gitlens.telemetry.enabled": false,
   "redhat.telemetry.enabled": false,
-
-  "shellcheck.customArgs": ["-s", "bash"],
+  "shellcheck.customArgs": [
+    "-s",
+    "bash"
+  ],
   "shellcheck.exclude": [
     "SC1090",
     "SC1091",
@@ -49,7 +45,6 @@
   "vs-kubernetes": {
     "vs-kubernetes.crd-code-completion": "disabled"
   },
-
   "[json][jsonc][markdown][shellscript][powershell][terraform][terraform-vars]": {
     "editor.tabSize": 2
   },

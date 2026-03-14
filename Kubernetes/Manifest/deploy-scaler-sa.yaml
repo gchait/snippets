@@ -10,9 +10,9 @@ kind: Role
 metadata:
   name: xx
 rules:
-- apiGroups: ["apps"]
-  resources: ["deployments", "deployments/scale"]
-  verbs: ["get", "list", "watch", "patch", "update"]
+  - apiGroups: [ "apps" ]
+    resources: [ "deployments", "deployments/scale" ]
+    verbs: [ "get", "list", "watch", "patch", "update" ]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -20,9 +20,9 @@ kind: RoleBinding
 metadata:
   name: xx
 subjects:
-- kind: ServiceAccount
-  name: xx
-  apiGroup: ""
+  - kind: ServiceAccount
+    name: xx
+    apiGroup: ""
 roleRef:
   kind: Role
   name: xx
@@ -44,8 +44,8 @@ metadata:
   name: "{{ .Release.Namespace }}-xx-kubeconfig"
 spec:
   forProvider:
-    region: {{ .Values.region }}
+    region: { { .Values.region } }
     forceDeleteWithoutRecovery: true
     stringSecretRef:
       name: xx
-      namespace: {{ .Release.Namespace }}
+      namespace: { { .Release.Namespace } }

@@ -19,6 +19,10 @@
       "InstanceId": "${aws:InstanceId}",
       "AutoScalingGroupName": "${aws:AutoScalingGroupName}"
     },
-    "aggregation_dimensions": [["AutoScalingGroupName"]]
+    "aggregation_dimensions": [
+      [
+        "AutoScalingGroupName"
+      ]
+    ]
   }
 }

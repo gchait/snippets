@@ -10,8 +10,8 @@ rm -f .git/MERGE_HEAD
 cd "${manifest_dir}"
 export new_tag=$(yq '.${specific_app}.bbbbb' xxxx/yyyy.yaml)
 git checkout "${dest_branch}"
-yq '. | .${specific_app}.bbbbb = env(new_tag)' xxxx/yyyy.yaml > yyyy.yaml.tmp \
-  && mv yyyy.yaml.tmp xxxx/yyyy.yaml
+yq '. | .${specific_app}.bbbbb = env(new_tag)' xxxx/yyyy.yaml > yyyy.yaml.tmp &&
+  mv yyyy.yaml.tmp xxxx/yyyy.yaml
 git checkout "${src_branch}" -- "zxxxx/${specific_app}.yaml"
 
 ### PUSH LOGIC GOES HERE ###

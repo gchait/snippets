@@ -4,27 +4,33 @@ TMP_FILE=/tmp/sealedsecret.yaml
 
 while getopts "h?pi:" opt; do
   case "${opt}" in
-    h|\?)
-      echo '+------------------------------------HELP------------------------------------+'
-      echo '| This script can generate a SealedSecret from a given Secret.               |'
-      echo '| It can also generate a random "password" value.                            |'
-      echo '| To include a random password, specify the -p argument.                     |'
-      echo '| Set the -i argument to the path of the Secret file.                        |'
-      echo '| You can export PASS_LEN before running to set a custom password length.    |'
-      echo '+----------------------------------------------------------------------------+'
-      exit 0
-      ;;
-    p)
-        # shellcheck disable=SC2181
-        password=$(export LC_CTYPE=C; false; while [ "${?}" -ne 0 ]; do \
-          tr -dc A-Za-z0-9 < /dev/urandom | head -c "${PASS_LEN}"; done)
-      ;;
-    i)  input_file="${OPTARG}"
-      ;;
+  h | \?)
+    echo '+------------------------------------HELP------------------------------------+'
+    echo '| This script can generate a SealedSecret from a given Secret.               |'
+    echo '| It can also generate a random "password" value.                            |'
+    echo '| To include a random password, specify the -p argument.                     |'
+    echo '| Set the -i argument to the path of the Secret file.                        |'
+    echo '| You can export PASS_LEN before running to set a custom password length.    |'
+    echo '+----------------------------------------------------------------------------+'
+    exit 0
+    ;;
+  p)
+    # shellcheck disable=SC2181
+    password=$(
+      export LC_CTYPE=C
+      false
+      while [ "${?}" -ne 0 ]; do
+        tr -dc A-Za-z0-9 < /dev/urandom | head -c "${PASS_LEN}"
+      done
+    )
+    ;;
+  i)
+    input_file="${OPTARG}"
+    ;;
   esac
 done
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 [ "${1:-}" = "--" ] && shift
 
 if [ -n "${1}" ]; then
@@ -48,7 +54,7 @@ name=$(yq '.metadata.name' "${input_file}")
 
 if [ -n "${password}" ]; then
   echo -n "${password}" | kubectl create secret generic "${name}" \
-    --dry-run=client --from-file=password=/dev/stdin -o yaml | \
+    --dry-run=client --from-file=password=/dev/stdin -o yaml |
     ${SEAL_CMD} --merge-into "${TMP_FILE}"
 fi
 
