@@ -1,3 +1,4 @@
+# shellcheck disable=SC2038
 find xxx -type d -mindepth 1 -maxdepth 1 |
   xargs -I {} bash -c "cd {} && terraform init -backend=false && terraform validate"
 

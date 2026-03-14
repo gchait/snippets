@@ -1,3 +1,4 @@
+# shellcheck disable=SC1090
 [[ -f ~/.hidden_zshrc ]] && source ~/.hidden_zshrc
 
 zypper in -y cups system-config-printer opi fetchmsttfonts code gdm

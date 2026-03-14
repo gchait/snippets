@@ -3,9 +3,10 @@
 Some functions to make ECS easier to use.
 """
 
-import construct as c
 import json
 import uuid
+
+import construct as c
 import websocket
 
 

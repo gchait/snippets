@@ -2,6 +2,7 @@ import os
 import shutil
 import sys
 import textwrap
+
 import yaml
 
 TOOL_NAME = "Xyz Lala"
@@ -45,6 +46,7 @@ def switch_dir():
 def verify_programs():
     """Checks if the required programs exist."""
     for program in REQUIRED_PROGRAMS:
+        # noinspection PyDeprecation
         if shutil.which(program) is None:
             fail(f"The program {program} is required to run this script.", 1)
 

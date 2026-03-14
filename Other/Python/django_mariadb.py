@@ -1,5 +1,6 @@
 # type: ignore
 
+# noinspection PyProtectedMember
 from pydantic import BaseSettings
 
 

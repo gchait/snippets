@@ -22,6 +22,7 @@ pretty() {
 
   # Main venv
   python3 -m venv ~/.venv
+  # shellcheck disable=SC1090
   . ~/.venv/bin/activate
   pip install isort black flake8 bandit requests pyyaml neovim
 

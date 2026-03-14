@@ -22,10 +22,11 @@ def remove_move_comment_list(li, item):
         comment = li.ca.items[i][0]
     li.remove(item)
     if comment is None:
-        return
+        return None
     if not li:
         return comment
     li.ca.items[i - 1] = [comment, None, None, None]
+    return None
 
 
 def append_move_comment_dict(di, key, value):
@@ -49,10 +50,11 @@ def remove_move_comment_dict(di, key):
         comment = di.ca.items[key][2]
     del di[key]
     if comment is None:
-        return
+        return None
     if not di:
         return comment
     di.ca.items[next(reversed(di))] = [None, None, comment, None]
+    return None
 
 
 def preserve_comment(data, key, comment):
@@ -66,7 +68,7 @@ def preserve_comment(data, key, comment):
 def extract_comment(data):
     """Retrieves the comment from after a commented collection recursively."""
     if not isinstance(data, (dict, list)) or not data:
-        return
+        return None
 
     last_item = -1 if isinstance(data, list) else next(reversed(data))
     comment_index = 0 if isinstance(data, list) else 2
