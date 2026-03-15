@@ -1,4 +1,4 @@
-(){
+() {
   local ins_prompt="${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
   [ -r "${ins_prompt}" ] && source "${ins_prompt}"
 }
@@ -32,7 +32,7 @@ jwtd() {
     return 2
   fi
 
-  echo "${input}" | jq -Rrce 'split(".")[1] | . + "=" * (. | 4 - length % 4)' | \
+  echo "${input}" | jq -Rrce 'split(".")[1] | . + "=" * (. | 4 - length % 4)' |
     openssl base64 -d -A | jq
 }
 
