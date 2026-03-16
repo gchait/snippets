@@ -10,15 +10,13 @@ ENV APP_USER appuser
 
 RUN adduser -DHs /sbin/nologin -g ${APP_USER} ${APP_USER}
 WORKDIR /tmp
-
-RUN apk add --update --no-cache --virtual ./build-deps \
-    build-base musl-dev zlib zlib-dev linux-headers
-
-RUN apk add --update --no-cache curl
 COPY ./reqs.txt ./
 
-RUN pip install --no-cache-dir -r ./reqs.txt \
-    && apk del ./build-deps \
+RUN apk add --update --no-cache --virtual build-deps \
+        build-base musl-dev zlib zlib-dev linux-headers \
+    && apk add --update --no-cache curl \
+    && pip install --no-cache-dir -r ./reqs.txt \
+    && apk del build-deps \
     && rm -rf ./*
 
 WORKDIR ${APP_DIR}
