@@ -44,8 +44,8 @@ metadata:
   name: "{{ .Release.Namespace }}-xx-kubeconfig"
 spec:
   forProvider:
-    region: {{ .Values.region }}
+    region: "{{ .Values.region }}"
     forceDeleteWithoutRecovery: true
     stringSecretRef:
       name: xx
-      namespace: {{ .Release.Namespace }}
+      namespace: "{{ .Release.Namespace }}"
