@@ -72,8 +72,8 @@ usermod -aG docker "${OS_USER}"
 # Docker end
 
 # MongoDB repo
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu \
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | gpg --dearmor -o /etc/apt/keyrings/mongodb-org.gpg
+echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/keyrings/mongodb-org.gpg ] https://repo.mongodb.org/apt/ubuntu \
   focal/mongodb-org/6.0 multiverse" |
   tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 
@@ -87,8 +87,8 @@ echo "deb [arch=$(dpkg --print-architecture) \
   tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
 # Amazon Corretto repo
-wget -O- https://apt.corretto.aws/corretto.key | apt-key add -
-add-apt-repository 'deb https://apt.corretto.aws stable main'
+wget -O- https://apt.corretto.aws/corretto.key | gpg --dearmor -o /etc/apt/keyrings/corretto.gpg
+echo "deb [signed-by=/etc/apt/keyrings/corretto.gpg] https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list > /dev/null
 
 # External repo packages
 apt_up

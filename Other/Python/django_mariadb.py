@@ -1,7 +1,7 @@
 # type: ignore
 
-# noinspection PyProtectedMember
-from pydantic import BaseSettings
+from pydantic import ConfigDict
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -13,8 +13,7 @@ class Settings(BaseSettings):
     maria_pass: str
     maria_addr: str
 
-    class Config:
-        env_file = ".env"
+    model_config = ConfigDict(env_file=".env")
 
 
 config = Settings()  # type: ignore
