@@ -2,7 +2,7 @@
 
 
 def instance_type_to_cpu_mem(
-        region: str, instance_type: str
+    region: str, instance_type: str
 ) -> Optional[tuple[int, int]]:
     """Translate an EC2/RDS instance type to CPUs and Memory."""
     client = ec2_clients[region]
