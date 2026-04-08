@@ -1,7 +1,7 @@
 # shellcheck disable=SC1090
 [[ -f ~/.hidden_zshrc ]] && source ~/.hidden_zshrc
 
-zypper in -y cups system-config-printer opi fetchmsttfonts code gdm
+zypper in -y cups system-config-printer opi code gdm
 opi codecs
 
 # flatpak install com.spotify.Client io.github.mimbrero.WhatsAppDesktop
