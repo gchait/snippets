@@ -39,6 +39,7 @@ def succeed(msg):
 def switch_dir():
     """Changes the CWD to the directory containing the script, so that opening relative paths would work."""
     abs_path = os.path.abspath(__file__)
+    # noinspection PyTypeChecker
     dir_name = os.path.dirname(abs_path)
     os.chdir(dir_name)
 
