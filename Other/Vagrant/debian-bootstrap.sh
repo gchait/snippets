@@ -62,7 +62,7 @@ install -m 0755 -d /etc/apt/keyrings
     gpg --dearmor -o /etc/apt/keyrings/docker.gpg &&
     chmod a+r /etc/apt/keyrings/docker.gpg; }
 
-# shellcheck disable=SC2027,SC2046
+# shellcheck disable=SC1091,SC2027,SC2046
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] \
   https://download.docker.com/linux/debian \
