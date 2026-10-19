@@ -7,4 +7,4 @@ comm -1 -2 <(grep "|command|" /var/log/zypp/history |
 # All installed
 grep "|command|" /var/log/zypp/history |
   grep -Eo -e "'in' (.+)|" -e "'install' (.+)|" |
-  cut -d" " -f2- | tr -d "'|" | sed "s/ /\n/g" | sort
+  cut -d" " -f2- | tr -d "'|" | sed "s/ /\n/g" | grep -v "^-" | sort

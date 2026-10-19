@@ -44,7 +44,7 @@ pretty() {
 apt_up
 # shellcheck disable=SC2046
 apt-get install -yq \
-  tree sl vim neovim make apt-transport-https \
+  tree sl vim neovim make \
   python3-venv python3-dev python3-setuptools \
   zip gzip tar jq cloud-utils zsh git lolcat \
   ca-certificates gnupg gcc curl dnsutils \

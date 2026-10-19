@@ -13,7 +13,7 @@ configure_user() {
     cp -Lr ./Home/.* ~/
   fi
 
-  # System-level Python packages
+  # User-level Python packages
   pip3 install requests pyyaml
 
   # Rust packages

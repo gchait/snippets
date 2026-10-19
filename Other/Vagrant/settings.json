@@ -18,7 +18,7 @@
     "redhat.vscode-yaml",
     "kokakiwi.vscode-just",
     "samuelcolvin.jinjahtml",
-    "bungcip.better-toml"
+    "tamasfe.even-better-toml"
   ],
   "files.eol": "\n",
   "git.enableSmartCommit": true,

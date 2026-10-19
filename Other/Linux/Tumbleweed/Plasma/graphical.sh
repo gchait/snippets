@@ -1,6 +1,10 @@
 # shellcheck disable=SC1090
 [[ -f ~/.hidden_zshrc ]] && source ~/.hidden_zshrc
 
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+printf '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc\n' \
+  > /etc/zypp/repos.d/vscode.repo
+
 zypper in -y cups system-config-printer opi code gdm
 opi codecs
 
@@ -25,7 +29,8 @@ code_exts() {
   code --install-extension tinkertrain.theme-panda
 }
 
-code_exts > /dev/null
+export -f code_exts
+su "${SUDO_USER}" -c "bash -c code_exts" > /dev/null
 
 set +x
 echo
