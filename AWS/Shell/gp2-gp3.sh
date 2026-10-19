@@ -23,7 +23,7 @@ for region in ${regions}; do
     #   --volume-id "${volume_id}" | jq '.VolumeModification.ModificationState' | tr -d '"')
 
     if [ "${result}" == "modifying" ]; then
-      echo "OK: Volume ${volume_id} changed its to state to 'modifying'."
+      echo "OK: Volume ${volume_id} changed its state to 'modifying'."
 
     else
       echo "ERROR: Couldn't change the type of volume ${volume_id} to gp3!"

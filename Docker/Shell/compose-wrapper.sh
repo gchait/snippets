@@ -1,7 +1,6 @@
 # shellcheck disable=SC2016
 export COMPOSE_FILE=compose.yaml
 export COMPOSE_PROJECT_NAME=xyz
-export DOCKER_SCAN_SUGGEST=false
 export COMPOSE_IGNORE_ORPHANS=true
 
 case "${1}" in

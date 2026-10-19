@@ -15,14 +15,10 @@ while getopts "h?pi:" opt; do
     exit 0
     ;;
   p)
-    # shellcheck disable=SC2181
     password=$(
       export LC_CTYPE=C
-      false
-      while [ "${?}" -ne 0 ]; do
-        tr -dc A-Za-z0-9 < /dev/urandom | head -c "${PASS_LEN}"
-      done
-    )
+      tr -dc A-Za-z0-9 < /dev/urandom | head -c "${PASS_LEN}"
+    ) || exit 2
     ;;
   i)
     input_file="${OPTARG}"
