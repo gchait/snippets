@@ -1,4 +1,4 @@
-multipass launch lunar `
+multipass launch noble `
   --name vm `
   --cpus 4 `
   --memory 8G `

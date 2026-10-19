@@ -19,7 +19,7 @@ pretty() {
 
   # ohmyzsh
   [[ -d ~/.oh-my-zsh ]] || sh -c "$(curl -fsSL \
-    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
   # p10k
   [[ -d ~/.oh-my-zsh/custom/themes/powerlevel10k ]] || git clone \
@@ -30,10 +30,9 @@ pretty() {
   python3 -m venv ~/.venv
   # shellcheck disable=SC1090
   . ~/.venv/bin/activate
-  pip install isort black flake8 bandit requests pyyaml neovim
+  pip install isort black flake8 bandit requests pyyaml pynvim
 
   cp /vagrant/.zshrc ~/
-  newgrp docker
   docker run hello-world
   docker container prune -f
 
@@ -43,13 +42,15 @@ pretty() {
 
 # Base repo packages
 apt_up
+# shellcheck disable=SC2046
 apt-get install -yq \
   tree sl vim neovim make apt-transport-https \
   python3-venv python3-dev python3-setuptools \
   zip gzip tar jq cloud-utils zsh git lolcat \
   ca-certificates gnupg gcc curl dnsutils \
-  cmatrix neofetch wget default-mysql-client \
-  libmariadb-dev software-properties-common
+  cmatrix wget default-mysql-client libmariadb-dev \
+  "$(apt-cache show fastfetch > /dev/null 2>&1 && echo fastfetch || echo neofetch)" \
+  $(apt-cache show software-properties-common > /dev/null 2>&1 && echo software-properties-common)
 
 # Docker start
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
@@ -79,10 +80,11 @@ usermod -aG docker vagrant
 # Docker end
 
 # MongoDB repo
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | gpg --dearmor -o /etc/apt/keyrings/mongodb-org.gpg
-echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/keyrings/mongodb-org.gpg ] https://repo.mongodb.org/apt/ubuntu \
-  focal/mongodb-org/6.0 multiverse" |
-  tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+wget -qO - https://www.mongodb.org/static/pgp/server-8.0.asc | gpg --dearmor -o /etc/apt/keyrings/mongodb-org.gpg
+# shellcheck disable=SC1091
+echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/keyrings/mongodb-org.gpg ] https://repo.mongodb.org/apt/debian \
+  $(. /etc/os-release && echo "${VERSION_CODENAME}")/mongodb-org/8.0 main" |
+  tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 
 # GitHub CLI repo
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg |
@@ -109,11 +111,11 @@ apt-get install -yq \
 
 # External binaries without deb/apt
 wget -qO /usr/local/bin/yq \
-  https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+  "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture)"
 chmod +x /usr/local/bin/yq
 
 wget -O /usr/local/bin/websocat \
-  https://github.com/vi/websocat/releases/latest/download/websocat.x86_64-unknown-linux-musl
+  "https://github.com/vi/websocat/releases/latest/download/websocat.$(uname -m)-unknown-linux-musl"
 chmod +x /usr/local/bin/websocat
 
 [[ -f /usr/local/bin/just ]] || curl --proto '=https' \

@@ -37,7 +37,7 @@ def ecs_execute_command(ecs_client, cluster: str, task: str, command: str) -> st
 
         agent_message_payload = c.Struct(
             "PayloadLength" / c.Int32ub,
-            "Payload" / c.PaddedString(c.this.PayloadLength, "ascii"),
+            "Payload" / c.PaddedString(c.this.PayloadLength, "utf8"),
         )
 
         while True:
@@ -45,7 +45,7 @@ def ecs_execute_command(ecs_client, cluster: str, task: str, command: str) -> st
             message = agent_message_header.parse(response)
 
             if "channel_closed" in message.MessageType:
-                raise Exception("Channel closed before command output was received")
+                raise RuntimeError("Channel closed before command output was received")
 
             if "output_stream_data" in message.MessageType:
                 break
@@ -53,4 +53,4 @@ def ecs_execute_command(ecs_client, cluster: str, task: str, command: str) -> st
     finally:
         connection.close()
 
-    return agent_message_payload.parse(response[message.HeaderLength:]).Payload
+    return agent_message_payload.parse(response[message.HeaderLength :]).Payload

@@ -62,20 +62,20 @@ write_files:
 
           # ohmyzsh
           [[ -d ~/.oh-my-zsh ]] || sh -c "$(curl -fsSL \
-              https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+              https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
           # p10k
           [[ -d ~/.oh-my-zsh/custom/themes/powerlevel10k ]] || git clone \
               --depth=1 https://github.com/romkatv/powerlevel10k.git \
-              ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k
+              "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k"
 
           # Global pip
           python3 -m venv ~/.venv
+          # shellcheck disable=SC1090
           . ~/.venv/bin/activate
-          pip3 install isort black flake8 bandit requests pyyaml neovim
+          pip3 install isort black flake8 bandit requests pyyaml pynvim
       
           # Test docker
-          newgrp docker
           docker run hello-world
           docker container prune -f
 
@@ -98,6 +98,7 @@ write_files:
           gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
           chmod a+r /etc/apt/keyrings/docker.gpg; }
 
+      # shellcheck disable=SC1091,SC2027,SC2046
       echo \
         "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] \
         https://download.docker.com/linux/ubuntu \
@@ -116,11 +117,11 @@ write_files:
       # Docker end
 
       # MongoDB repo
-      wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | gpg --dearmor -o /etc/apt/keyrings/mongodb-org.gpg
+      wget -qO - https://www.mongodb.org/static/pgp/server-8.0.asc | gpg --dearmor -o /etc/apt/keyrings/mongodb-org.gpg
 
       echo "deb [ arch=amd64,arm64 signed-by=/etc/apt/keyrings/mongodb-org.gpg ] https://repo.mongodb.org/apt/ubuntu \
-          focal/mongodb-org/6.0 multiverse" | \
-          tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+          noble/mongodb-org/8.0 multiverse" | \
+          tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 
       # GitHub CLI repo
       curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
@@ -143,11 +144,11 @@ write_files:
 
       # External binaries without deb/apt
       wget -qO /usr/local/bin/yq \
-          https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(dpkg --print-architecture)"
       chmod +x /usr/local/bin/yq
 
       wget -O /usr/local/bin/websocat \
-          https://github.com/vi/websocat/releases/latest/download/websocat.x86_64-unknown-linux-musl
+          "https://github.com/vi/websocat/releases/latest/download/websocat.$(uname -m)-unknown-linux-musl"
       chmod +x /usr/local/bin/websocat
 
       curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | \
@@ -156,9 +157,9 @@ write_files:
       # User configuration for ubuntu
       export -f pretty
       su ubuntu -c "/bin/bash -xec pretty"
-      chsh -s $(which zsh) ubuntu
+      chsh -s "$(which zsh)" ubuntu
 
-      > /etc/motd
+      true > /etc/motd
       apt_up
 
 runcmd:

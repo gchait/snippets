@@ -22,8 +22,7 @@ for region in ${regions}; do
     # result=$($AWS ec2 modify-volume --region "${region}" --volume-type=gp3 \
     #   --volume-id "${volume_id}" | jq '.VolumeModification.ModificationState' | tr -d '"')
 
-    # shellcheck disable=SC2181
-    if [ $? -eq 0 ] && [ "${result}" == "modifying" ]; then
+    if [ "${result}" == "modifying" ]; then
       echo "OK: Volume ${volume_id} changed its to state to 'modifying'."
 
     else

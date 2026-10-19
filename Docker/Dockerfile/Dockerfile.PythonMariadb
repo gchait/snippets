@@ -5,7 +5,7 @@ COPY ./reqs.txt .
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        gcc libmariadb-dev pkg-config \
+        gcc libmariadb-dev libmariadb3 pkg-config \
     && pip install --no-cache-dir -r ./reqs.txt \
     && apt-get purge -y --auto-remove gcc libmariadb-dev pkg-config \
     && apt-get clean \
@@ -13,6 +13,5 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY src/ .
-COPY .env ./
 
 CMD ["./run.sh"]

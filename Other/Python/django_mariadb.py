@@ -1,10 +1,13 @@
 # type: ignore
+"""Django settings for a MariaDB-backed app, read from the environment."""
 
 from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 
 
-class Settings(BaseSettings):
+class Settings(BaseSettings):  # pylint: disable=too-few-public-methods
+    """Settings read from the environment and the .env file."""
+
     secret_key: str
     debug: bool
     maria_port: str
@@ -83,7 +86,7 @@ _pw_validators = (
 )
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": f"django.contrib.auth.password_validation{pwv}"} for pwv in _pw_validators
+    {"NAME": f"django.contrib.auth.password_validation.{pwv}"} for pwv in _pw_validators
 ]
 
 LANGUAGE_CODE = "en-us"

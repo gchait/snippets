@@ -8,7 +8,6 @@ metadata:
     policies.kyverno.io/description: >-
       XXX
 spec:
-  mutateExistingOnPolicyUpdate: true
   rules:
     - name: XXX
       preconditions:

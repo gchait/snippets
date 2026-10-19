@@ -19,3 +19,26 @@ resource "aws_lambda_function_url" "test" {
   function_name      = aws_lambda_function.test.function_name
   authorization_type = "NONE"
 }
+
+resource "aws_iam_role_policy_attachment" "test" {
+  role       = aws_iam_role.test.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_lambda_permission" "test_url" {
+  count                  = var.enable_url ? 1 : 0
+  function_name          = aws_lambda_function.test.function_name
+  statement_id           = "FunctionURLAllowPublicAccess"
+  action                 = "lambda:InvokeFunctionUrl"
+  principal              = "*"
+  function_url_auth_type = "NONE"
+}
+
+resource "aws_lambda_permission" "test_url_invoke" {
+  count                    = var.enable_url ? 1 : 0
+  function_name            = aws_lambda_function.test.function_name
+  statement_id             = "FunctionURLInvokeAllowPublicAccess"
+  action                   = "lambda:InvokeFunction"
+  principal                = "*"
+  invoked_via_function_url = true
+}

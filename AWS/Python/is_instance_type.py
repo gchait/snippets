@@ -1,4 +1,7 @@
 # type: ignore
+# pylint: disable=undefined-variable
+# ruff: noqa: F821
+"""Validate EC2 instance type names against the ones a region offers."""
 
 
 def ec2_instance_types(region):

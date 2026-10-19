@@ -1,9 +1,9 @@
 $env:VAGRANT_EXPERIMENTAL = "disks"
 
-$calcMem = [math]::Ceiling((Get-WmiObject -Class Win32_ComputerSystem | `
+$calcMem = [math]::Ceiling((Get-CimInstance -ClassName Win32_ComputerSystem | `
   Select-Object -ExpandProperty TotalPhysicalMemory) / 1GB)
 
-$calcCpu = (Get-WmiObject -Class Win32_Processor | `
+$calcCpu = (Get-CimInstance -ClassName Win32_Processor | `
   Measure-Object -Property NumberOfCores -Sum).Sum
 
 $env:GIT_NAME = "Guy Chait"
@@ -29,7 +29,7 @@ else
   1
 }
 
-New-Alias v vagrant
+Set-Alias v vagrant
 
 function ntex
 {

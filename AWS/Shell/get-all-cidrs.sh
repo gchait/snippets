@@ -2,7 +2,7 @@
 # Make sure you can authenticate first, as this script hides all errors!
 # To show only the information collected, run this with "2> /dev/null".
 
-profiles=$(grep -Eo "^\[profile (.+)\]$" ~/.aws/config | cut -d" " -f2 | tr -d "]")
+profiles=$(aws configure list-profiles)
 regions="XXX XXX XXX"
 output=""
 

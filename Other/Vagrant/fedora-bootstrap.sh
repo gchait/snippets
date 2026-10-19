@@ -25,7 +25,7 @@ configure_user() {
 }
 
 get_docker() {
-  dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
   dnf install -y docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin
   echo '{"default-address-pools":[{"base":"10.2.0.0/16","size":24}]}' > \
@@ -44,14 +44,14 @@ dnf install --setopt=install_weak_deps=false -y \
   wget awscli2 openssl asciinema lolcat zip gzip \
   tar jq zsh-autosuggestions git eza poetry htop \
   python3-wheel gnupg gcc clang curl postgresql \
-  ca-certificates dnsutils cmatrix ranger cmake
+  ca-certificates bind-utils cmatrix ranger cmake
 
 # Docker
 docker ps &> /dev/null || get_docker
 
 # External executables
 wget -qO /usr/local/bin/yq \
-  https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+  "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
 chmod +x /usr/local/bin/yq
 
 wget -qO /usr/local/bin/pfetch \
@@ -69,12 +69,9 @@ if [ "${OS_USERNAME}" = "vagrant" ]; then
   # Ensure the filesystem takes all the space
   growpart /dev/sda 2 || true
   xfs_growfs /dev/sda2 || true
-
-  # Flex
-  dnf install -y neofetch
-else
-  dnf install -y fastfetch
 fi
+
+dnf install -y fastfetch
 
 # Regular user configuration
 export -f configure_user

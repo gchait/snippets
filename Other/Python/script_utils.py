@@ -1,3 +1,5 @@
+"""Helpers for small command-line scripts: output, files and validation."""
+
 import os
 import shutil
 import sys
@@ -37,8 +39,9 @@ def succeed(msg):
 
 
 def switch_dir():
-    """Changes the CWD to the directory containing the script, so that opening relative paths would work."""
-    abs_path = os.path.abspath(__file__)
+    """Changes the CWD to the directory containing the script,
+    so that opening relative paths would work."""
+    abs_path = os.path.abspath(sys.argv[0])
     # noinspection PyTypeChecker
     dir_name = os.path.dirname(abs_path)
     os.chdir(dir_name)
@@ -55,16 +58,17 @@ def verify_programs():
 def yaml_read(path):
     """Reads a YAML file, returning it as a dictionary."""
     try:
-        with open(path, "r") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return data
     except OSError:
         fail(f"File {path} could not be found or accessed.", 1)
+        return None
 
 
 def yaml_write(path, data):
     """Writes a dictionary to a YAML file at the given path."""
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         yaml.dump(data, f)
 
 
@@ -72,8 +76,10 @@ def delete(path):
     """Deletes a given file."""
     try:
         os.remove(path)
-    except OSError:
+    except FileNotFoundError:
         pass
+    except OSError:
+        fail(f"File {path} could not be deleted.", 1)
     succeed(f"File {path} is now deleted.")
 
 
