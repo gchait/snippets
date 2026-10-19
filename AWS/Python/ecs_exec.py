@@ -33,24 +33,46 @@ def ecs_execute_command(ecs_client, cluster: str, task: str, command: str) -> st
         agent_message_header = c.Struct(
             "HeaderLength" / c.Int32ub,
             "MessageType" / c.PaddedString(32, "ascii"),
+            "SchemaVersion" / c.Int32ub,
+            "CreatedDate" / c.Int64ub,
+            "SequenceNumber" / c.Int64sb,
+            "Flags" / c.Int64ub,
+            "MessageId" / c.Bytes(16),
+            "PayloadDigest" / c.Bytes(32),
+            "PayloadType" / c.Int32ub,
         )
 
         agent_message_payload = c.Struct(
             "PayloadLength" / c.Int32ub,
-            "Payload" / c.PaddedString(c.this.PayloadLength, "utf8"),
+            "Payload" / c.Bytes(c.this.PayloadLength),
         )
 
+        output = {}
         while True:
-            response = connection.recv()
+            try:
+                response = connection.recv()
+            except websocket.WebSocketConnectionClosedException:
+                if not output:
+                    raise
+                break
+
             message = agent_message_header.parse(response)
 
             if "channel_closed" in message.MessageType:
-                raise RuntimeError("Channel closed before command output was received")
-
-            if "output_stream_data" in message.MessageType:
                 break
+
+            if "output_stream_data" in message.MessageType and message.PayloadType in (
+                1,
+                11,
+            ):
+                payload = agent_message_payload.parse(response[message.HeaderLength :])
+                output[message.SequenceNumber] = payload.Payload
 
     finally:
         connection.close()
 
-    return agent_message_payload.parse(response[message.HeaderLength :]).Payload
+    if not output:
+        raise RuntimeError("Channel closed before command output was received")
+
+    data = b"".join(output[n] for n in sorted(output))
+    return c.PaddedString(len(data), "utf8").parse(data)
