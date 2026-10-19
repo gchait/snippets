@@ -13,5 +13,6 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY src/ .
+COPY .env ./
 
 CMD ["./run.sh"]
