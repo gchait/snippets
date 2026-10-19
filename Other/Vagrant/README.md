@@ -5,10 +5,8 @@
   cd .\Vagrant
   v up
   mkdir $HOME\.ssh -Force
-  [IO.File]::WriteAllLines("$HOME\.ssh\vagrant", (v ssh-config))
+  [IO.File]::WriteAllLines("$HOME\.ssh\config", (v ssh-config))
   ```
-
-- Add `Include vagrant` as the first line of `$HOME\.ssh\config` (create it if it doesn't exist).
 
 - Open VSCodium and use Remote Explorer to open `default` at `~/Projects`.
 

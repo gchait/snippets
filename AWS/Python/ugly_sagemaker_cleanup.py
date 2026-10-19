@@ -4,7 +4,6 @@ from random import shuffle
 from subprocess import run
 
 REGION = "xxx"
-TAG_KEY = "xxx"
 TAG = "xxx"
 TRIES = 2
 
@@ -79,7 +78,7 @@ def discover_sagemaker_resources():
     arns = run(
         (
             f"aws resourcegroupstaggingapi get-resources --region {REGION} --tag-filters "
-            f"Key={TAG_KEY},Values={TAG} --query 'ResourceTagMappingList[].ResourceARN' | "
+            f"Key=TAG,Values={TAG} --query 'ResourceTagMappingList[].ResourceARN' | "
             "grep ':sagemaker:' | tr -d '\",' | awk '{print $1}' | sort"
         ),
         check=False,

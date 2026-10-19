@@ -1,8 +1,9 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
 ARG app_name
 ARG app_prefix=xx_
-ARG app_uid=10001
+ARG app_uid=100
+ARG app_gid=101
 ARG top_dir=/app
 ARG app_dir="${top_dir}/${app_name}"
 ARG utils_dir="${top_dir}/utils"
@@ -17,7 +18,8 @@ COPY "${app_prefix}utils/*" ./
 RUN test -n "${app_name}" || (echo "Please set app_name." && false) \
     && pip3 install --no-cache-dir -r requirements.txt \
     && rm requirements.txt \
-    && adduser --group --system --no-create-home --uid "${app_uid}" "${app_name}"
+    && addgroup --system --gid "${app_gid}" "${app_name}" \
+    && adduser --system --no-create-home --uid "${app_uid}" --ingroup "${app_name}" "${app_name}"
 
 WORKDIR "${app_dir}"
 COPY "${app_prefix}${app_name}/requirements.txt" "${app_prefix}${app_name}/${py_main}" ./

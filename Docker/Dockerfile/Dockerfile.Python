@@ -8,7 +8,7 @@ ENV PORT=8080
 ENV APP_DIR=/appdir
 ENV APP_USER=appuser
 
-RUN adduser -DHs /sbin/nologin -g ${APP_USER} -u 10001 ${APP_USER}
+RUN adduser -DHs /sbin/nologin -g ${APP_USER} -u 1000 ${APP_USER}
 WORKDIR /tmp
 COPY ./reqs.txt ./
 
@@ -22,7 +22,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
 WORKDIR ${APP_DIR}
 COPY . .
 
-USER 10001
+USER 1000
 EXPOSE ${PORT}
 
 CMD ["./run.sh"]

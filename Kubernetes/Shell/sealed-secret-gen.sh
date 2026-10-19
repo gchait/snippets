@@ -64,7 +64,7 @@ rm -f "${TMP_FILE}"
 echo "# Input:"
 echo "# ---"
 # shellcheck disable=SC2001
-echo "${input}" | yq '(select(has("data")).data[], select(has("stringData")).stringData[]) = "REDACTED"' | sed 's/^/# /g'
+echo "${input}" | sed 's/^/# /g'
 echo
 
 echo "# Result:"
