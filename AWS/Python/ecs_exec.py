@@ -56,6 +56,9 @@ def ecs_execute_command(ecs_client, cluster: str, task: str, command: str) -> st
                     raise
                 break
 
+            if not response:
+                break
+
             message = agent_message_header.parse(response)
 
             if "channel_closed" in message.MessageType:
