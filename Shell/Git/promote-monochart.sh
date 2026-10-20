@@ -13,7 +13,7 @@ git checkout - || true
 cd "${manifest_dir}"
 export new_tag=$(yq ".${specific_app}.bbbbb" xxxx/yyyy.yaml)
 git checkout "${dest_branch}"
-yq ". | .${specific_app}.bbbbb = env(new_tag)" xxxx/yyyy.yaml > yyyy.yaml.tmp &&
+yq ". | .${specific_app}.bbbbb = strenv(new_tag)" xxxx/yyyy.yaml > yyyy.yaml.tmp &&
   mv yyyy.yaml.tmp xxxx/yyyy.yaml
 git add xxxx/yyyy.yaml
 git checkout "${src_branch}" -- "zxxxx/${specific_app}.yaml"

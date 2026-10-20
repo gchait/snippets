@@ -128,8 +128,10 @@ su vagrant -c "bash -xec pretty"
 chsh -s "$(which zsh)" vagrant
 
 # Ensure the filesystem takes the whole virtual disk
-growpart /dev/sda 1 || true
-resize2fs /dev/sda1 || true
+growpart /dev/sda 2 || true
+growpart /dev/sda 5 || true
+pvresize /dev/sda5 || true
+lvextend -r -l +100%FREE "$(findmnt -no SOURCE /)" || true
 
 true > /etc/motd
 apt_up
