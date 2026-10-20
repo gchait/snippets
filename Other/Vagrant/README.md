@@ -5,7 +5,7 @@
   cd .\Vagrant
   v up
   mkdir $HOME\.ssh -Force
-  [IO.File]::WriteAllLines("$HOME\.ssh\config", (v ssh-config))
+  v ssh-config | out-file $HOME\.ssh\config -encoding utf8
   ```
 
 - Open VSCodium and use Remote Explorer to open `default` at `~/Projects`.

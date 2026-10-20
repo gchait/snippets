@@ -44,7 +44,8 @@ dnf install --setopt=install_weak_deps=false -y \
   wget awscli2 openssl asciinema lolcat zip gzip \
   tar jq zsh-autosuggestions git eza poetry htop \
   python3-wheel gnupg gcc clang curl postgresql \
-  ca-certificates bind-utils cmatrix ranger cmake
+  ca-certificates bind-utils cmatrix ranger cmake \
+  cloud-utils-growpart
 
 # Docker
 docker ps &> /dev/null || get_docker
