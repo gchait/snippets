@@ -1,5 +1,5 @@
-variable "function_name" {}
-variable "runtime" {}
-variable "arch" {}
-variable "handler" {}
-variable "enable_url" {}
+variable "function_name" { type = string }
+variable "runtime" { type = string }
+variable "arch" { type = string }
+variable "handler" { type = string }
+variable "enable_url" { type = bool }
